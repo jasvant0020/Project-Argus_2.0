@@ -74,4 +74,106 @@ TARGET_NAMES = ["ELON MUSK", "JASVANT"]
 BOT_TOKEN = "your_bot_token"
 CHAT_ID = "your_chat_id"
 ```
+- Use BotFather to create a bot and get a token
+- Use @userinfobot to get your Chat ID
+
+---
+
+⏱️ Attendance Time Gap
+```In attendance.py, change:
+TIME_GAP_MINUTES = 5  # prevents frequent logging
+```
+---
+
+## 🔊 Alert Sound
+- Place your sound in assets/alert.mp3
+- Must be in .mp3 format
+- It will play when a target person is detected
+
+---
+
+## 📦 Installation
+```🐍 1. Clone and Set Up Virtual Environment
+git clone https://github.com/yourname/FaceRecognitionProject
+cd FaceRecognitionProject
+python -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+```
+```📦 2. Install Python Dependencies
+pip install -r requirements.txt
+```
+If face_recognition or dlib fails:
+- Use Python 3.10 or earlier for best compatibility
+
+---
+
+## ▶️ Running the Project
+```
+python main.py
+```
+- Press Q to exit the webcam
+- Check attendance logs in assets/Attendance.csv
+
+---
+
+##💡 Tips
+- Make sure lighting is good when capturing new face images
+- Restart main.py after adding new images to generate encodings
+- Add multiple names to TARGET_NAMES for multi-alerts
+- Use .env file for storing secrets securely (optional)
+---
+
+## 🔐 Dependencies
+```
+face_recognition
+opencv-python
+numpy
+pygame
+requests
+dlib (via face_recognition)
+```
+Install all with:
+```
+pip install -r requirements.txt
+```
+---
+
+## 📈 Example Attendance Entry
+```
+Name,Timestamp,Confidence
+ELON MUSK,2025-08-02 16:40:09,91.34
+```
+---
+
+## 🛡️ License
+This project is for educational and personal use. Commercial or surveillance use must comply with local laws regarding face recognition.
+
+---
+
+## 🙌 Credits
+Developed by Jasvant Singh
+AI + Vision Enthusiast | Final-Year B.Tech
+
+---
+
+Let me know if you’d like:
+- A shortened GitHub version
+- Project logo or badge
+- Auto-retraining script for adding new persons  
+- `.env` support for secrets management
+
+I'm ready to assist!
+
+
+
+
+
+
+
+
+
+
+
+
+
 
