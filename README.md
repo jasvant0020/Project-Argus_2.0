@@ -28,7 +28,7 @@ A modular real-time face recognition system that:
     ├── requirements.txt     # Python dependencies
     └── README.md            # Documentation
     
-    venv/
+    venv/                    # prefer python 3.10
 
 ---
 
