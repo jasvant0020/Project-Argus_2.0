@@ -118,7 +118,7 @@ python main.py
 
 
 
-##💡 Tips
+## 💡Tips
 - Make sure lighting is good when capturing new face images
 - Restart main.py after adding new images to generate encodings
 - Add multiple names to TARGET_NAMES for multi-alerts
