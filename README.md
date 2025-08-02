@@ -68,3 +68,10 @@ A modular real-time face recognition system that:
 Edit this in `main.py`:
 ```python
 TARGET_NAMES = ["ELON MUSK", "JASVANT"]
+```
+## 📲 Telegram Alert Setup
+In notifier.py, replace:
+BOT_TOKEN = "your_bot_token"
+CHAT_ID = "your_chat_id"
+
+
