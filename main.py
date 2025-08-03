@@ -22,7 +22,7 @@ else:
     print("❌ Alert sound not found.")
 
 encodeListKnown, classNames = load_encodings_with_check()
-print("Encoding Complete. Starting Webcam...")
+print("Encoding Complete. Starting Webcam...just in 10 sec")
 
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
@@ -88,5 +88,6 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+
 
 
