@@ -139,8 +139,9 @@ Install all with:
 pip install -r requirements.txt
 ```
 ## 🔧 Environment Setup (Summary)
+Project Argus relies on the `face_recognition` library, which has some setup requirements on Windows (especially for dlib).
 
-Project Argus uses the `face_recognition` library. Make sure to:
+To avoid common installation issues, follow this guide before running the project:
 
 - Use Python 3.6–3.10
 - Set up a virtual environment
