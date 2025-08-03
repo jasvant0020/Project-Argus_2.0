@@ -14,19 +14,25 @@ A modular real-time face recognition system that:
 ## 📁 Project Structure
     Project-Argus/
     │
-    ├── main.py              # Main controller — runs detection and coordination
-    ├── notifier.py          # Sends Telegram alerts (non-blocking)
-    ├── attendance.py        # Logs attendance with time-gap and confidence
-    ├── encoding_manager.py  # Handles image loading, encoding, and caching
+    ├── main.py
+    ├── notifier.py
+    ├── attendance.py
+    ├── encoding_manager.py
+    ├── logger/
+    │   └── snapshot_logger.py     # 🔍 NEW: Logs full frame + metadata on detection
     │
-    ├── ImagesAttendance/    # Store images of persons to recognize
-    ├── encodings/           # Stores pickle-encoded face encodings
+    ├── ImagesAttendance/
+    ├── encodings/
     ├── assets/
-    │ ├── Attendance.csv     # CSV log of detections
-    │ └── alert.mp3          # Sound played on detection
-    │
-    ├── requirements.txt     # Python dependencies
-    └── README.md            # Documentation
+    │   ├── Attendance.csv
+    │   └── alert.mp3
+    ├── logs/                      # 📸 NEW: Auto-created snapshot + metadata storage
+    │   └── NISHANT/
+    │       ├── last_seen.jpg
+    │       └── meta.json
+    ├── requirements.txt
+    └── README.md
+
     
     venv/                    # prefer python 3.10
 
@@ -41,6 +47,10 @@ A modular real-time face recognition system that:
 - 📈 **Confidence-Based Updates**: Higher-confidence detection updates older entry
 - 📩 **Telegram Alert Notification** on specific names
 - 🔊 **Alert Sound** when target person is detected
+- 📸 Snapshot Logging: Saves full webcam frame + metadata when target person is detected
+  - This helps in **post-review** or **evidence logging** of detected persons.
+
+
 
 
 
@@ -53,6 +63,23 @@ A modular real-time face recognition system that:
    - Logs entry in CSV (once per 5 minutes or if confidence is higher)
    - Sends Telegram alert if person is in your `TARGET_NAMES` list
    - Plays alert sound
+### 📸 Snapshot Logging on Detection
+
+For every detection of a person in `TARGET_NAMES`, the system:
+
+- Saves the **entire webcam frame** (not just the face)
+- Stores the frame in: `logs/<PERSON_NAME>/last_seen.jpg`
+- Saves metadata like:
+  - `object_id` (internal ID)
+  - `timestamp`
+  - `bbox` (bounding box of the face inside frame)
+
+🗂 Example folder:
+
+    logs/
+    └── NISHANT/
+        ├── last_seen.jpg # full webcam frame at detection time
+        └── meta.json # info about detection
 
 
 
