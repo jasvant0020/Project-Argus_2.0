@@ -147,7 +147,7 @@ Project Argus uses the `face_recognition` library. Make sure to:
 - Install CMake and Visual Studio C++ Build Tools
 - Install `dlib==19.24.2` and then `face_recognition`
 
-📖 [Full Setup Guide Here](https://github.com/jasvant0020/face-recognition-windows-install-guid)
+📖 [Full Setup Guide Here](https://github.com/jasvant0020/face-recognition-windows-install-guid?tab=readme-ov-file#-face-recognition-setup-guide-windows)
 
 
 ## 📈 Example Attendance Entry
