@@ -138,6 +138,16 @@ Install all with:
 ```
 pip install -r requirements.txt
 ```
+## 🔧 Environment Setup (Summary)
+
+Project Argus uses the `face_recognition` library. Make sure to:
+
+- Use Python 3.6–3.10
+- Set up a virtual environment
+- Install CMake and Visual Studio C++ Build Tools
+- Install `dlib==19.24.2` and then `face_recognition`
+
+📖 [Full Setup Guide Here](https://github.com/jasvant0020/face-recognition-setup-guide)
 
 
 ## 📈 Example Attendance Entry
