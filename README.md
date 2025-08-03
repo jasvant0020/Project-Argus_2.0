@@ -27,14 +27,14 @@ A modular real-time face recognition system that:
     │   ├── Attendance.csv
     │   └── alert.mp3
     ├── logs/                      # 📸 NEW: Auto-created snapshot + metadata storage
-    │   └── NISHANT/
+    │   └── JASVANT/
     │       ├── last_seen.jpg
     │       └── meta.json
     ├── requirements.txt
     └── README.md
 
     
-    venv/                    # prefer python 3.10
+    venv/                          # prefer python 3.10
 
 ---
 
@@ -77,9 +77,9 @@ For every detection of a person in `TARGET_NAMES`, the system:
 🗂 Example folder:
 
     logs/
-    └── NISHANT/
-        ├── last_seen.jpg # full webcam frame at detection time
-        └── meta.json # info about detection
+    └── JASVANT/
+        ├── last_seen.jpg    # full webcam frame at detection time
+        └── meta.json        # info about detection
 
 
 
