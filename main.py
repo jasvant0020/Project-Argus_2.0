@@ -5,6 +5,7 @@ import face_recognition
 from encoding_manager import load_encodings_with_check
 from notifier import send_telegram_notification
 from attendance import markAttendance
+from logger.snapshot_logger import save_object_snapshot
 import os
 
 # ====== Configuration ======
@@ -79,3 +80,4 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+
