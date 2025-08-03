@@ -65,6 +65,14 @@ while True:
                 detected = True
                 send_telegram_notification(name)
 
+                # Save snapshot log of this detection
+                save_object_snapshot(
+                    object_name=name,
+                    object_id=matchIndex,
+                    frame=img,
+                    bbox=(x1, y1, x2, y2)
+                )
+
     if detected and not person_present:
         print("🔊 Playing alert sound...")
         if os.path.exists(ALERT_SOUND) and not sound_channel.get_busy():
@@ -80,4 +88,5 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+
 
