@@ -4,10 +4,10 @@
 A modular real-time face recognition system that:
 
 ✅ Detects known faces via webcam  
-✅ Logs attendance with confidence and timestamp  
-✅ Sends Telegram alerts when specific people are detected  
-✅ Avoids duplicate logs using time threshold  
-✅ Works offline with robust encoding & caching  
+- Logs attendance with confidence and timestamp  
+- Sends Telegram alerts when specific people are detected  
+- Avoids duplicate logs using time threshold  
+- Works offline with robust encoding & caching  
 
 ---
 
