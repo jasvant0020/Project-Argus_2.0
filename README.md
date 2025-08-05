@@ -66,6 +66,7 @@ A modular real-time face recognition system that:
 
 ## 🧠 How It Works
 
+✅ For Detects known faces via webcam 
 1. Face images in `ImagesAttendance/` are encoded using `face_recognition`
 2. Encodings are cached to `encodings/encodings.pkl`
 3. `main.py` reads webcam frames and runs recognition
@@ -73,6 +74,8 @@ A modular real-time face recognition system that:
    - Logs entry in CSV (once per 5 minutes or if confidence is higher)
    - Sends Telegram alert if person is in your `TARGET_NAMES` list
    - Plays alert sound
+✅ Detects unknown persons (not in your known face list).
+
 ### 📸 Snapshot Logging on Detection
 
 For every detection of a person in `TARGET_NAMES`, the system:
