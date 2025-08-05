@@ -38,9 +38,13 @@ A modular real-time face recognition system that:
     │   ├── Attendance.csv
     │   └── alert.mp3
     ├── logs/                      # 📸 NEW: Auto-created snapshot + metadata storage
-    │   └── JASVANT/
-    │       ├── last_seen.jpg
-    │       └── meta.json
+    │   ├── JASVANT/
+    │   │    ├── last_seen.jpg         # full webcam frame at detection time
+    │   │    └── meta.json             # info about detection
+    │   └── UNKNOWN\
+    │         ├── unknown_20250805_135039.jpg
+    │         └── unknown_20250805_135051.jpg
+    │
     ├── requirements.txt
     └── README.md
 
