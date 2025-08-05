@@ -6,6 +6,7 @@ from encoding_manager import load_encodings_with_check
 from notifier import send_telegram_notification
 from attendance import markAttendance
 from logger.snapshot_logger import save_object_snapshot
+from logger.unknown_logger import log_unknown
 import os
 
 # ====== Configuration ======
@@ -27,6 +28,8 @@ print("Encoding Complete. Starting Webcam...just in 10 sec")
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+
+print("Webcam is live ")
 
 person_present = False
 
@@ -72,6 +75,16 @@ while True:
                     frame=img,
                     bbox=(x1, y1, x2, y2)
                 )
+        else:
+            # Handle unknown person
+            confidence = (1 - np.min(faceDis)) * 100
+            y1, x2, y2, x1 = [v * 4 for v in faceLoc]
+
+            cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)  # Red box
+            text = f"UNKNOWN {confidence:.2f}%"
+            cv2.putText(img, text, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+
+            log_unknown(img, encodeFace, confidence)
 
     if detected and not person_present:
         print("🔊 Playing alert sound...")
@@ -88,6 +101,7 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+
 
 
 
