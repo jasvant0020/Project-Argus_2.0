@@ -7,7 +7,16 @@ A modular real-time face recognition system that:
 - Logs attendance with confidence and timestamp  
 - Sends Telegram alerts when specific people are detected  
 - Avoids duplicate logs using time threshold  
-- Works offline with robust encoding & caching  
+- Works offline with robust encoding & caching
+✅ Detects unknown persons (not in your known face list).
+- Ensures each unique unknown person is logged only once every X seconds.
+- Logs include:
+  - Name: "UNKNOWN"
+  - Timestamp
+  - Confidence score
+  - Snapshot saved in logs/UNKNOWN/
+
+
 
 ---
 
