@@ -29,7 +29,8 @@ A modular real-time face recognition system that:
     ├── attendance.py
     ├── encoding_manager.py
     ├── logger/
-    │   └── snapshot_logger.py     # 🔍 NEW: Logs full frame + metadata on detection
+    │   ├── snapshot_logger.py     # 🔍 NEW: Logs full frame + metadata on detection
+    |   └── unknown_logger.py      # Tracks unknown face encodings and handles logging.
     │
     ├── ImagesAttendance/
     ├── encodings/
@@ -95,11 +96,12 @@ For every detection of a person in `TARGET_NAMES`, the system:
 🗂 Example folder:
 
     logs/
-    └── JASVANT/
-        ├── last_seen.jpg    # full webcam frame at detection time
-        └── meta.json        # info about detection
-
-
+    ├── JASVANT/
+    │    ├── last_seen.jpg    # full webcam frame at detection time
+    │    └── meta.json        # info about detection
+    └── UNKNOWN\
+         ├── unknown_20250805_135039.jpg
+         └── unknown_20250805_135051.jpg
 
 ## 📸 Image Requirements
 
