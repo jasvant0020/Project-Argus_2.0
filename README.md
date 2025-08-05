@@ -74,7 +74,12 @@ A modular real-time face recognition system that:
    - Logs entry in CSV (once per 5 minutes or if confidence is higher)
    - Sends Telegram alert if person is in your `TARGET_NAMES` list
    - Plays alert sound
+
 ✅ Detects unknown persons (not in your known face list).
+1. When a face doesn't match known encodings, its face encoding is compared to previously seen unknowns using a distance threshold.
+2. If it's a new unknown person, it will be logged and snapshot will be saved.
+If it's a known unknown, it will only be logged again after a gap of X seconds (configurable).
+3. This prevents duplicate logging of the same person while allowing others to be logged immediately.
 
 ### 📸 Snapshot Logging on Detection
 
