@@ -32,7 +32,7 @@ A modular real-time face recognition system that:
     ├── notifier.py
     ├── ArgusLog.py
     ├── encoding_manager.py
-    ├── gui.py                     #  GUI for live webcam and logs
+    ├── gui.py                     #  Run it instead of main.py
     ├── logger/
     │   ├── snapshot_logger.py     # 🔍 NEW: Logs full frame + metadata on detection
     |   └── unknown_logger.py      # Tracks unknown face encodings and handles logging.
