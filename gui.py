@@ -155,6 +155,19 @@ class ArgusGUI:
             self.log_text.config(state='disabled')
         self.root.after(2000, self.update_logs_from_csv)  # Refresh every 2s
 
+    def pause(self):
+        self.running = False
+        self.status_canvas.itemconfig(self.status_dot, fill="red")
+        main.stop_alarm()  # 🔴 force stop alarm when webcam is paused
+        self.log("\nWebcam paused")
+
+    def exit(self):
+        self.running = False
+        main.stop_alarm()  # 🔴 also stop alarm before closing
+        self.cap.release()
+        self.root.destroy()
+
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = ArgusGUI(root)
