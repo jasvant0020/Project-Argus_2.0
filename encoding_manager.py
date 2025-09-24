@@ -3,7 +3,7 @@ import pickle
 import cv2
 import face_recognition
 
-IMAGE_PATH = 'ImagesAttendance'
+IMAGE_PATH = 'ImagesArgusLog'
 ENCODE_DIR = 'encodings'
 PICKLE_FILE = os.path.join(ENCODE_DIR, 'encodings.pkl')
 META_FILE = os.path.join(ENCODE_DIR, 'encoding_meta.pkl')

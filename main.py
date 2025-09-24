@@ -4,7 +4,7 @@ import pygame
 import face_recognition
 from encoding_manager import load_encodings_with_check
 from notifier import send_telegram_notification
-from attendance import markAttendance
+from ArgusLog import markArgusLog
 from logger.snapshot_logger import save_object_snapshot
 from logger.unknown_logger import log_unknown
 import os
@@ -23,21 +23,18 @@ else:
     print("❌ Alert sound not found.")
 
 encodeListKnown, classNames = load_encodings_with_check()
-print("Encoding Complete. Starting Webcam...just in 10 sec")
+print("Encoding Complete.")
 
-cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+# Webcam initialized in GUI, not here
+person_present = False   # state flag for alert sound
 
-print("Webcam is live ")
 
-person_present = False
+def process_frame(img):
+    """Process one frame: detect faces, log, notify, draw HUD."""
+    global person_present
 
-while True:
-    success, img = cap.read()
-    if not success:
-        print("❌ Webcam error.")
-        break
+    # ✅ UPDATED: prepare a list to collect detection logs for GUI
+    log_messages = []
 
     imgS = cv2.resize(img, (0, 0), None, 0.25, 0.25)
     imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
@@ -57,18 +54,20 @@ while True:
             confidence = (1 - faceDis[matchIndex]) * 100
 
             y1, x2, y2, x1 = [v * 4 for v in faceLoc]
-            cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)  # green box
+            cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
             text = f"{name} {confidence:.2f}%"
-            cv2.putText(img, text, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+            cv2.putText(img, text, (x1, y1 - 10),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
 
-            markAttendance(name, confidence)
+            markArgusLog(name, confidence)
+
+            # ✅ UPDATED: log detected name
+            log_messages.append(f"Detected: {name} | Confidence: {confidence:.2f}%")
 
             if name in TARGET_NAMES:
                 detected = True
                 send_telegram_notification(name)
-
-                # Save snapshot log of this detection
                 save_object_snapshot(
                     object_name=name,
                     object_id=matchIndex,
@@ -76,16 +75,21 @@ while True:
                     bbox=(x1, y1, x2, y2)
                 )
         else:
-            # Handle unknown person
+            # Handle unknown
             confidence = (1 - np.min(faceDis)) * 100
             y1, x2, y2, x1 = [v * 4 for v in faceLoc]
 
-            cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)  # Red box
+            cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
             text = f"UNKNOWN {confidence:.2f}%"
-            cv2.putText(img, text, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+            cv2.putText(img, text, (x1, y1 - 10),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 
             log_unknown(img, encodeFace, confidence)
 
+            # ✅ UPDATED: log unknown
+            log_messages.append(f"Unknown face | Confidence: {confidence:.2f}%")
+
+    # 🔊 Handle alert sound
     if detected and not person_present:
         print("🔊 Playing alert sound...")
         if os.path.exists(ALERT_SOUND) and not sound_channel.get_busy():
@@ -95,13 +99,5 @@ while True:
         sound_channel.stop()
         person_present = False
 
-    cv2.imshow('Webcam', img)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-
-
-
+    # At the end of process_frame:
+    return img
