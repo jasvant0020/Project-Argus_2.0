@@ -1,10 +1,10 @@
-# Project-Argus
+# Project-Argus_2.0
 🎯 Face Recognition Alert & Attendance System
 
 A modular real-time face recognition system that:
 
 ✅ Detects known faces via webcam  
-- Logs attendance with confidence and timestamp  
+- Logs presence with confidence and timestamp  
 - Sends Telegram alerts when specific people are detected  
 - Avoids duplicate logs using time threshold  
 - Works offline with robust encoding & caching
@@ -17,6 +17,10 @@ A modular real-time face recognition system that:
   - Confidence score
   - Snapshot saved in logs/UNKNOWN/
 
+- ✅ Tkinter GUI (optional) for live feed, controls, and log visualization
+  - Start / Pause / Stop webcam feed
+  - View detection logs in real-time
+  - Access snapshots and CSV directly from GUI
 
 
 ---
@@ -26,16 +30,17 @@ A modular real-time face recognition system that:
     │
     ├── main.py
     ├── notifier.py
-    ├── attendance.py
+    ├── ArgusLog.py
     ├── encoding_manager.py
+    ├── gui.py                     #  GUI for live webcam and logs
     ├── logger/
     │   ├── snapshot_logger.py     # 🔍 NEW: Logs full frame + metadata on detection
     |   └── unknown_logger.py      # Tracks unknown face encodings and handles logging.
     │
-    ├── ImagesAttendance/
+    ├── ImagesArgusLog/
     ├── encodings/
     ├── assets/
-    │   ├── Attendance.csv
+    │   ├── ArgusLog.csv
     │   └── alert.mp3
     ├── logs/                      # 📸 NEW: Auto-created snapshot + metadata storage
     │   ├── JASVANT/
@@ -64,9 +69,7 @@ A modular real-time face recognition system that:
 - 🔊 **Alert Sound** when target person is detected
 - 📸 Snapshot Logging: Saves full webcam frame + metadata when target person is detected
   - This helps in **post-review** or **evidence logging** of detected persons.
-
-
-
+- 🖥 **Tkinter GUI**: Live webcam feed, detection logs, buttons for control, and direct access to snapshots & CSV
 
 
 ## 🧠 How It Works
