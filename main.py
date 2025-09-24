@@ -101,3 +101,11 @@ def process_frame(img):
 
     # At the end of process_frame:
     return img
+
+def stop_alarm():
+    """Force stop the alarm sound when GUI stops webcam."""
+    global person_present
+    sound_channel.stop()
+    person_present = False
+
+
