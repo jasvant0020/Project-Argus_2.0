@@ -1,0 +1,20 @@
+# === Core Computer Vision and Face Recognition ===
+opencv-python>=4.9.0
+insightface>=0.7.3
+onnxruntime-gpu>=1.16.0  # GPU backend (💡 if no GPU: replace with onnxruntime instead)
+
+# === Math and Data Handling ===
+numpy>=1.26.0
+scikit-learn>=1.5.0
+
+# === Multimedia and Sound ===
+pygame>=2.5.2
+
+# === Utilities and Networking ===
+requests>=2.31.0
+
+# === Logging and Time ===
+pandas>=2.2.0
+
+# === Optional (for Jupyter / debug visualization) ===
+matplotlib>=3.9.0
