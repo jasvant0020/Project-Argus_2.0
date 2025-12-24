@@ -97,6 +97,67 @@ For every detection of a person in `TARGET_NAMES`, the system:
   - `timestamp`
   - `bbox` (bounding box of the face inside frame)
 
+
+### Work Flow Diagram
+```mermaid
+
+
+flowchart TD
+
+%% ================= INPUT =================
+CAM[🎥 Webcam Feed]
+
+%% ================= MAIN =================
+MAIN[main.py<br/>🎯 Core Controller]
+
+%% ================= ENCODING =================
+ENC_MGR[encoding_manager.py<br/>🧠 Face Encoding & Cache]
+ENC_STORE[(encodings.pkl)]
+
+%% ================= KNOWN =================
+KNOWN[Known Face Match]
+ATT[attendance.py<br/>📝 Attendance Logger]
+CSV[(Attendance.csv)]
+
+%% ================= UNKNOWN =================
+UNKNOWN[Unknown Face Detected]
+UNK_LOG[unknown_logger.py<br/>👤 Unknown Tracker]
+UNK_STORE[(Unknown Encodings Cache)]
+
+%% ================= ALERTS =================
+NOTIF[notifier.py<br/>📩 Telegram Alert]
+SOUND[🔊 Alert Sound]
+
+%% ================= SNAPSHOTS =================
+SNAP[snapshot_logger.py<br/>📸 Snapshot Logger]
+LOGS[(logs/<br/>PERSON / UNKNOWN)]
+
+%% ================= FLOW =================
+CAM --> MAIN
+
+MAIN --> ENC_MGR
+ENC_MGR --> ENC_STORE
+
+MAIN --> KNOWN
+MAIN --> UNKNOWN
+
+%% Known flow
+KNOWN --> ATT
+ATT --> CSV
+KNOWN --> NOTIF
+KNOWN --> SOUND
+KNOWN --> SNAP
+
+%% Unknown flow
+UNKNOWN --> UNK_LOG
+UNK_LOG --> UNK_STORE
+UNK_LOG --> SNAP
+
+SNAP --> LOGS
+
+    
+```
+
 🗂 Example folder:
 
     logs/
