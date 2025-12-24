@@ -97,8 +97,8 @@ For every detection of a person in `TARGET_NAMES`, the system:
   - `timestamp`
   - `bbox` (bounding box of the face inside frame)
 
-
-### Work Flow Diagram
+---
+### 📊 Work Flow Diagram
 ```mermaid
 
 
