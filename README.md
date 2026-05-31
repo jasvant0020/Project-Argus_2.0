@@ -1,4 +1,4 @@
-# Project-Argus
+# Project-Argus_2.0
  Real-Time Face Recognition Alert & Attendance System
 
 A modular real-time face recognition system that:
