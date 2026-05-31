@@ -1,15 +1,15 @@
 # Project-Argus
-🎯 Real-Time Face Recognition Alert & Attendance System
+ Real-Time Face Recognition Alert & Attendance System
 
 A modular real-time face recognition system that:
 
-✅ Detects known faces via webcam  
+ Detects known faces via webcam  
 - Logs attendance with confidence and timestamp  
 - Sends Telegram alerts when specific people are detected  
 - Avoids duplicate logs using time threshold  
 - Works offline with robust encoding & caching
 
-✅ Detects unknown persons (not in your known face list).
+ Detects unknown persons (not in your known face list).
 - Ensures each unique unknown person is logged only once every X seconds.
 - Logs include:
   - Name: "UNKNOWN"
@@ -21,7 +21,7 @@ A modular real-time face recognition system that:
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
     Project-Argus/
     │
     ├── main.py
@@ -29,7 +29,7 @@ A modular real-time face recognition system that:
     ├── attendance.py
     ├── encoding_manager.py
     ├── logger/
-    │   ├── snapshot_logger.py     # 🔍 NEW: Logs full frame + metadata on detection
+    │   ├── snapshot_logger.py     #  NEW: Logs full frame + metadata on detection
     |   └── unknown_logger.py      # Tracks unknown face encodings and handles logging.
     │
     ├── ImagesAttendance/
@@ -37,7 +37,7 @@ A modular real-time face recognition system that:
     ├── assets/
     │   ├── Attendance.csv
     │   └── alert.mp3
-    ├── logs/                      # 📸 NEW: Auto-created snapshot + metadata storage
+    ├── logs/                      #  NEW: Auto-created snapshot + metadata storage
     │   ├── JASVANT/
     │   │    ├── last_seen.jpg         # full webcam frame at detection time
     │   │    └── meta.json             # info about detection
@@ -53,25 +53,25 @@ A modular real-time face recognition system that:
 
 ---
 
-## 🚀 Features
+##  Features
 
-- 🎥 **Real-Time Detection** using webcam
-- 🧠 **Face Encoding Caching** for fast startup
-- 📝 **Attendance Logging** to `assets/Attendance.csv`
-- ⏱️ **Time Gap Protection**: Avoids repeating logs within 5 minutes per person
-- 📈 **Confidence-Based Updates**: Higher-confidence detection updates older entry
-- 📩 **Telegram Alert Notification** on specific names
-- 🔊 **Alert Sound** when target person is detected
-- 📸 Snapshot Logging: Saves full webcam frame + metadata when target person is detected
+-  **Real-Time Detection** using webcam
+-  **Face Encoding Caching** for fast startup
+-  **Attendance Logging** to `assets/Attendance.csv`
+-  **Time Gap Protection**: Avoids repeating logs within 5 minutes per person
+-  **Confidence-Based Updates**: Higher-confidence detection updates older entry
+-  **Telegram Alert Notification** on specific names
+-  **Alert Sound** when target person is detected
+-  Snapshot Logging: Saves full webcam frame + metadata when target person is detected
   - This helps in **post-review** or **evidence logging** of detected persons.
 
 
 
 
 
-## 🧠 How It Works
+##  How It Works
 
-✅ If Detects known faces via webcam 
+ If Detects known faces via webcam 
 1. Face images in `ImagesAttendance/` are encoded using `insightface`
 2. Encodings are cached to `encodings/encodings.pkl`
 3. `main.py` reads webcam frames and runs recognition
@@ -80,13 +80,13 @@ A modular real-time face recognition system that:
    - Sends Telegram alert if person is in your `TARGET_NAMES` list
    - Plays alert sound
 
-✅ If Detects unknown persons (not in your known face list).
+ If Detects unknown persons (not in your known face list).
 1. When a face doesn't match known encodings, its face encoding is compared to previously seen unknowns using a distance threshold.
 2. If it's a new unknown person, it will be logged and snapshot will be saved.
 3. If it's a known unknown, it will only be logged again after a gap of X seconds (configurable).
 4. This prevents duplicate logging of the same person while allowing others to be logged immediately.
 
-### 📸 Snapshot Logging on Detection
+###  Snapshot Logging on Detection
 
 For every detection of a person in `TARGET_NAMES`, the system:
 
@@ -98,7 +98,7 @@ For every detection of a person in `TARGET_NAMES`, the system:
   - `bbox` (bounding box of the face inside frame)
 
 ---
-### 📊 Work Flow Diagram
+###  Work Flow Diagram
 ```mermaid
 
 
@@ -108,28 +108,28 @@ flowchart TD
 CAM[🎥 Webcam Feed]
 
 %% ================= MAIN =================
-MAIN[main.py<br/>🎯 Core Controller]
+MAIN[main.py<br/> Core Controller]
 
 %% ================= ENCODING =================
-ENC_MGR[encoding_manager.py<br/>🧠 Face Encoding & Cache]
+ENC_MGR[encoding_manager.py<br/> Face Encoding & Cache]
 ENC_STORE[(encodings.pkl)]
 
 %% ================= KNOWN =================
 KNOWN[Known Face Match]
-ATT[attendance.py<br/>📝 Attendance Logger]
+ATT[attendance.py<br/> Attendance Logger]
 CSV[(Attendance.csv)]
 
 %% ================= UNKNOWN =================
 UNKNOWN[Unknown Face Detected]
-UNK_LOG[unknown_logger.py<br/>👤 Unknown Tracker]
+UNK_LOG[unknown_logger.py<br/> Unknown Tracker]
 UNK_STORE[(Unknown Encodings Cache)]
 
 %% ================= ALERTS =================
-NOTIF[notifier.py<br/>📩 Telegram Alert]
-SOUND[🔊 Alert Sound]
+NOTIF[notifier.py<br/> Telegram Alert]
+SOUND[ Alert Sound]
 
 %% ================= SNAPSHOTS =================
-SNAP[snapshot_logger.py<br/>📸 Snapshot Logger]
+SNAP[snapshot_logger.py<br/> Snapshot Logger]
 LOGS[(logs/<br/>PERSON / UNKNOWN)]
 
 %% ================= FLOW =================
@@ -158,7 +158,7 @@ SNAP --> LOGS
     
 ```
 
-🗂 Example folder:
+ Example folder:
 
     logs/
     ├── JASVANT/
@@ -168,7 +168,7 @@ SNAP --> LOGS
          ├── unknown_20250805_135039.jpg
          └── unknown_20250805_135051.jpg
 
-## 📸 Image Requirements
+##  Image Requirements
 
 - Place clear, front-facing images in `ImagesAttendance/`
 - Folder name must be the person's name (e.g., `JASVANT`) and file name must be like (`1.jpg , 2.jpg , 3.jpg etc`)
@@ -176,14 +176,14 @@ SNAP --> LOGS
 
 
 
-## ⚙️ Configuration
+##  Configuration
 
-### 🎯 Target Person(s) for Alert
+###  Target Person(s) for Alert
 Edit this in `main.py`:
 ```python
 TARGET_NAMES = ["ELON MUSK", "JASVANT"]
 ```
-## 📲 Telegram Alert Setup
+##  Telegram Alert Setup
 ```In notifier.py, replace:
 BOT_TOKEN = "your_bot_token"
 CHAT_ID = "your_chat_id"
@@ -193,27 +193,27 @@ CHAT_ID = "your_chat_id"
 
 
 
-⏱️ Attendance Time Gap
+ Attendance Time Gap
 ```In attendance.py, change:
 TIME_GAP_MINUTES = 5  # prevents frequent logging
 ```
 
 
-## 🔊 Alert Sound
+##  Alert Sound
 - Place your sound in assets/alert.mp3
 - Must be in .mp3 format
 - It will play when a target person is detected
 
 
 
-## 📦 Installation
-```🐍 1. Clone and Set Up Virtual Environment
+##  Installation
+``` 1. Clone and Set Up Virtual Environment
 git clone https://github.com/yourname/FaceRecognitionProject
 cd FaceRecognitionProject
 python -m venv venv
 source venv/bin/activate  # or venv\Scripts\activate on Windows
 ```
-```📦 2. Install Python Dependencies
+``` 2. Install Python Dependencies
 pip install -r requirements.txt
 ```
 If insightface or dlib fails:
@@ -221,7 +221,7 @@ If insightface or dlib fails:
 
 
 
-## ▶️ Running the Project
+##  Running the Project
 ```
 python main.py
 ```
@@ -230,14 +230,14 @@ python main.py
 
 
 
-## 💡Tips
+## Tips
 - Make sure lighting is good when capturing new face images
 - Restart main.py after adding new images to generate encodings
 - Add multiple names to TARGET_NAMES for multi-alerts
 - Use .env file for storing secrets securely (optional)
 
 
-## 🔐 Dependencies
+##  Dependencies
 ```
 insightface
 opencv-python
@@ -250,7 +250,7 @@ Install all with:
 ```
 pip install -r requirements.txt
 ```
-## 🔧 Environment Setup (Summary)
+##  Environment Setup (Summary)
 Project Argus relies on the `insightface` library, which has some setup requirements on Windows (especially for dlib).
 
 To avoid common installation issues, follow this guide before running the project:
@@ -260,10 +260,10 @@ To avoid common installation issues, follow this guide before running the projec
 - Install CMake and Visual Studio C++ Build Tools
 - Install `dlib==19.24.2` and then `insightface`
 
-📖 [Full Setup Guide Here](https://github.com/jasvant0020/face-recognition-windows-install-guid?tab=readme-ov-file#-face-recognition-setup-guide-windows)
+ [Full Setup Guide Here](https://github.com/jasvant0020/face-recognition-windows-install-guid?tab=readme-ov-file#-face-recognition-setup-guide-windows)
 
 
-## 📈 Example Attendance Entry
+##  Example Attendance Entry
 ```
 Name,Timestamp,Confidence
 ELON MUSK,2025-08-02 16:40:09,91.34
@@ -273,11 +273,11 @@ ELON MUSK,2025-08-02 17:00:15,98.76
 ```
 
 
-## 🛡️ License
+##  License
 This project is for educational and personal use. Commercial or surveillance use must comply with local laws regarding face recognition.
 
 
 
-## 🙌 Credits
+##  Credits
 Developed by Jasvant
 AI + Vision Enthusiast | Final-Year B.Tech
